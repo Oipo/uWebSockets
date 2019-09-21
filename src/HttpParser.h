@@ -259,7 +259,7 @@ public:
         } else if (fallback.length()) {
             int had = fallback.length();
 
-            int maxCopyDistance = std::min(MAX_FALLBACK_SIZE - fallback.length(), length);
+            int maxCopyDistance = std::min(MAX_FALLBACK_SIZE - fallback.length(), (size_t) length);
 
             /* We don't want fallback to be short string optimized, since we want to move it */
             fallback.reserve(fallback.length() + maxCopyDistance + std::max<int>(MINIMUM_HTTP_POST_PADDING, sizeof(std::string)));
