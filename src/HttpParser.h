@@ -41,7 +41,7 @@ private:
     struct Header {
         std::string_view key, value;
     } headers[MAX_HEADERS];
-    int querySeparator;
+    unsigned int querySeparator;
     bool didYield;
 
     std::pair<int, std::string_view *> currentParameters;
@@ -231,7 +231,7 @@ public:
         return std::move(fallback);
     }
 
-    void *consumePostPadded(char *data, int length, void *user, fu2::unique_function<void *(void *, HttpRequest *)> &&requestHandler, fu2::unique_function<void *(void *, std::string_view, bool)> &&dataHandler, fu2::unique_function<void *(void *)> &&errorHandler) {
+    void *consumePostPadded(char *data, unsigned int length, void *user, fu2::unique_function<void *(void *, HttpRequest *)> &&requestHandler, fu2::unique_function<void *(void *, std::string_view, bool)> &&dataHandler, fu2::unique_function<void *(void *)> &&errorHandler) {
 
         HttpRequest req;
 
@@ -259,7 +259,7 @@ public:
         } else if (fallback.length()) {
             int had = fallback.length();
 
-            int maxCopyDistance = std::min(MAX_FALLBACK_SIZE - fallback.length(), (size_t) length);
+            int maxCopyDistance = std::min(MAX_FALLBACK_SIZE - fallback.length(), length);
 
             /* We don't want fallback to be short string optimized, since we want to move it */
             fallback.reserve(fallback.length() + maxCopyDistance + std::max<int>(MINIMUM_HTTP_POST_PADDING, sizeof(std::string)));
