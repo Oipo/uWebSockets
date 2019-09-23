@@ -44,7 +44,7 @@ private:
     unsigned int querySeparator;
     bool didYield;
 
-    std::pair<int, std::string_view *> currentParameters;
+    std::pair<unsigned int, std::string_view *> currentParameters;
 
 public:
     bool getYield() {
@@ -112,7 +112,7 @@ public:
         }
     }
 
-    void setParameters(std::pair<int, std::string_view *> parameters) {
+    void setParameters(std::pair<unsigned int, std::string_view *> parameters) {
         currentParameters = parameters;
     }
 
