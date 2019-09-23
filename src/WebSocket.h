@@ -54,7 +54,7 @@ public:
     using Super::close;
 
     /* Send or buffer a WebSocket frame, compressed or not. Returns false on increased user space backpressure. */
-    virtual bool send(std::string_view message, uWS::OpCode opCode = uWS::OpCode::BINARY, bool compress = false) {
+    bool send(std::string_view message, uWS::OpCode opCode = uWS::OpCode::BINARY, bool compress = false) {
         /* Transform the message to compressed domain if requested */
         if (compress) {
             WebSocketData *webSocketData = (WebSocketData *) Super::getAsyncSocketData();
